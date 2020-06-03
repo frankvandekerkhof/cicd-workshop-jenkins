@@ -9,6 +9,7 @@ plugins {
     id("io.spring.dependency-management") version "1.0.9.RELEASE"
     id("com.moowork.node") version "1.3.1"
     id("com.github.spotbugs") version "4.2.3"
+    id("com.heroku.sdk.heroku-gradle") version "1.0.4"
 }
 
 version = "1.0"
@@ -89,4 +90,16 @@ tasks {
         from(buildAngular)
         into("${sourceSets.main.get().output.resourcesDir}/static")
     }
+    
+}
+
+heroku {
+    val bootJar: org.springframework.boot.gradle.tasks.bundling.BootJar by tasks
+    appName = "jcore-cicd-demo"
+    includes = listOf("${project.buildDir}/libs/${bootJar.archiveFileName.get()}")
+    includeBuildDir = false
+    includeRootDir = project.projectDir
+    processTypes = mapOf(
+            "web" to "java \$JVM_OPTS -jar build/libs/${bootJar.archiveFileName.get()} --server.port=\$PORT --add-opens java.base/java.lang=ALL-UNNAMED"
+    )
 }
