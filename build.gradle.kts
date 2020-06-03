@@ -96,7 +96,7 @@ tasks {
 
 heroku {
     val bootJar: org.springframework.boot.gradle.tasks.bundling.BootJar by tasks
-    appName = "jcore-cicd-demo"
+    appName = "jcore-cicd-demo-frank"
     includes = listOf("${project.buildDir}/libs/${bootJar.archiveFileName.get()}")
     includeBuildDir = false
     includeRootDir = project.projectDir
