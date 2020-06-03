@@ -20,6 +20,9 @@ pipeline {
                     steps{ sh './gradlew checkstyleMain --no-daemon' //run a gradle task }
                 }
 				stage('Deploy') {	
+					environment {
+						HEROKU_API_KEY = credentials('heroku-api-key-frank')
+						}
 					steps {
 						script {
 							id("com.heroku.sdk.heroku-gradle") version "1.0.4"
@@ -27,7 +30,6 @@ pipeline {
 					}
 				}
             }
-
         }
     }
 }
