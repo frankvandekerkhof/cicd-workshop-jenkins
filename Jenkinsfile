@@ -19,13 +19,12 @@ pipeline {
                 stage("Checkstyle"){
                     steps{ sh './gradlew checkstyleMain --no-daemon' } //run a gradle task 
                 }
-				stage('Deploy') {	
-					environment {
-						HEROKU_API_KEY = credentials('heroku-api-key-frank')
-						}
-					steps { sh ‘./gradlew deployHeroku --no-daemon’ }
-				}
+
             }
         }
+        				stage('Deploy') {	
+					environment { HEROKU_API_KEY = credentials('heroku-api-key-frank') }
+					steps { sh ‘./gradlew deployHeroku --no-daemon’ }
+				}
     }
 }
