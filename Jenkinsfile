@@ -17,10 +17,15 @@ pipeline {
                    steps{ sh './gradlew build -x test --no-daemon' }
                 }
                 stage("Checkstyle"){
-                    steps{ sh './gradlew checkstyleMain --no-daemon' //run a gradle task
-                        }
+                    steps{ sh './gradlew checkstyleMain --no-daemon' //run a gradle task }
                 }
-
+				stage('Deploy') {	
+					steps {
+						script {
+							id("com.heroku.sdk.heroku-gradle") version "1.0.4"
+						}
+					}
+				}
             }
 
         }
