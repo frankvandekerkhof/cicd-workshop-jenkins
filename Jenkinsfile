@@ -1,17 +1,13 @@
-#!/usr/bin/env groovy
-
 pipeline {
     agent any
 
     stages{
         stage("Sequential: clean, compile, test and build"){
             stages{
-
+            
                 stage("clean") {
                     steps {
-
                         sh "git clean -xdf"
-
                     }
                 }
 
@@ -45,7 +41,7 @@ pipeline {
 
         stage('deploy'){
             environment{
-                HEROKU_API_KEY = credentials('heroku-api-key-hein')
+                HEROKU_API_KEY = credentials('heroku-api-key-frank')
             }
             steps { sh './gradlew deployHeroku --no-daemon' }
         }
