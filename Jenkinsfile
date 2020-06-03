@@ -17,7 +17,7 @@ pipeline {
                    steps{ sh './gradlew build -x test --no-daemon' }
                 }
                 stage("Checkstyle"){
-                    steps{ sh './gradlew checkstyleMain --no-daemon' //run a gradle task }
+                    steps{ sh './gradlew checkstyleMain --no-daemon' } //run a gradle task 
                 }
 				stage('Deploy') {	
 					environment {
@@ -32,4 +32,4 @@ pipeline {
             }
         }
     }
-}}
+}
